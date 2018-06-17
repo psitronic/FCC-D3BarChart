@@ -20,25 +20,30 @@ d3.json(url, (error, data) => {
 	const h = 500;
 	const padding = 50;
 
-	const xScale = d3.scaleTime()
+	var div = d3.select("body").append("div")	
+		.attr("class", "tooltip")
+		.attr("id", "tooltip")				
+		.style("opacity", 0);
+
+	var xScale = d3.scaleTime()
 					.domain([
 							d3.min(dataset, (d) => d[0]),
 							d3.max(dataset, (d) => d[0])
 						])
 					.range([padding, w - padding]);
 
-    const yScale = d3.scaleLinear()
+    var yScale = d3.scaleLinear()
                     .domain([0, d3.max(dataset, (d) => d[1])])
                     .range([h - padding, padding]);
 
 
-	const svg = d3.select("body")
+	var svg = d3.select("body")
 		.append("svg")
 		.attr("width", w)
 		.attr("height", h);
 
-	const xAxis = d3.axisBottom(xScale);
-	const yAxis = d3.axisLeft(yScale);
+	var xAxis = d3.axisBottom(xScale);
+	var yAxis = d3.axisLeft(yScale);
 
 	svg.append("g")
 		.attr("id", "x-axis")
@@ -60,11 +65,23 @@ d3.json(url, (error, data) => {
 		.attr("class", "bar")
 		.attr("x", (d) => xScale(d[0]))
 		.attr("y", (d) => yScale(d[1]))
-		.attr("width", 2)
+		.attr("width", 3)
 		.attr("height", (d) => d[1] )
-		.append("title")
-		.text((d) => d[1]);
+        .on("mouseover", function(d) {
 
+            div.transition()		
+                .duration(200)		
+                .style("opacity", .9);		
+            div	.html(d[0])	
+				.style("left", (d3.event.pageX + 50) + "px")
+				.style("top", (250) + "px");	
+            })					
+
+        .on("mouseout", function(d) {		
+            div.transition()		
+                .duration(750)		
+                .style("opacity", 0);
+            });
 });
 
 
