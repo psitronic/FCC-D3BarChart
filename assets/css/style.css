@@ -1,3 +1,12 @@
+body{
+	margin: 0;
+	font-family: "Roboto";
+}
+
+.container{
+	margin: 5% 20%;
+}
+
 .bar:hover {
 	fill: white;
 }
@@ -5,8 +14,8 @@
 div.tooltip {	
     position: absolute;			
     text-align: center;			
-    width: 150px;					
-    height: 68px;					
+    width: 200px;					
+    height: 55px;					
     padding: 2px;				
     font: 24px sans-serif;		
     background: lightsteelblue;	
@@ -14,4 +23,17 @@ div.tooltip {
     border-radius: 3px;			
     pointer-events: none;
     box-shadow: 3px 3px 5px grey;			
+}
+
+.axisTitle {
+	font-size: 26px;
+}
+
+.axis {
+	font-size: 18px;
+}
+
+.title {
+	font-size: 34px;
+	font-weight: 700;
 }
